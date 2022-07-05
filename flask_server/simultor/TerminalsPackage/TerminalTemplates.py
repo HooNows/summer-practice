@@ -1,0 +1,3 @@
+radujniy = {'type_name': 'Радужный', 'max_supply': 999999, 'load_speed': 200, 'unload_speed': 0, 'mean_income': 150, 'std_income': 10, 'num_rails': 1, 'type': 'common'}
+zvezda = {'type_name': 'Звезда', 'max_supply': 999999, 'load_speed': 250, 'unload_speed': 0, 'mean_income': 50, 'std_income': 2, 'num_rails': 1, 'type': 'common'}
+polyarniy = {'type_name': 'Полярный', 'max_supply': 15000, 'load_speed': 300, 'unload_speed': 200, 'mean_income': 0, 'std_income': 0, 'num_rails': 3, 'type': 'polar'}

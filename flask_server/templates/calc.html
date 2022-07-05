@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>База данных</title>
+</head>
+
+<body>
+    <div class="navbar navbar-expand-lg bg-primary fixed-top" id="menu">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="index" class="nav-link text-light">Главная</a>
+            </li>
+            {% for name,_ in (trains+terms) %}
+            <li class="nav-item">
+                <a href="#{{name}}" class="nav-link text-light">{{name}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <section class="bg-success mt-5">
+        {% for name,data in trains %}
+        <h2 id="{{name}}">{{name}}</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Date</th>
+                <th>Supply</th>
+                <th>Position</th>
+            </tr>
+
+            {% for d in data %}
+            <tr>
+                <td>{{d[0]}}</td>
+                <td>{{d[1]}}</td>
+                <td>{{d[2]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <br>
+        <br>
+        {% endfor %}
+
+        {% for name,data in terms %}
+        <h2 id="{{name}}">{{name}}</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Date</th>
+                <th>Supply</th>
+                <th>Max Supply</th>
+                <th>Income</th>
+                <th>Trains</th>
+            </tr>
+
+            {% for d in data %}
+            <tr>
+                <td>{{d[0]}}</td>
+                <td>{{d[1]}}</td>
+                <td>{{d[2]}}</td>
+                <td>{{d[3]}}</td>
+                <td>{{d[4]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <br>
+        <br>
+        {% endfor %}
+
+   </section>
+   </button>
+</body>
+</html>
+
+
+
+
+
+

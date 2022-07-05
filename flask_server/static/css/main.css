@@ -1,0 +1,16 @@
+.index_header{
+    background:  #000 url('../img/index_bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 900px;
+}
+
+.header_title{
+   border-radius: 50px;
+}
+
+.header_btn{
+    border-radius: 50px;
+    font-size: 25px;
+    font-weight: bold;
+}
