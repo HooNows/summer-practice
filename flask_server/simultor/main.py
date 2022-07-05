@@ -1,8 +1,6 @@
 from simultor.TrainsPackage.TrainClass import Train
-from simultor.TrainsPackage.TrainTemplates import *
 
 from simultor.TerminalsPackage.TerminalClass import Terminal
-from simultor.TerminalsPackage.TerminalTemplates import *
 
 from simultor.PathPackage.PathClass import Path
 
