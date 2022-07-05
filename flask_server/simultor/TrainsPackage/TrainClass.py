@@ -1,18 +1,18 @@
 class Train:
 
-    def __init__(self, name, train_type, cur_supply, cur_pos, onTheWay = True):
+    def __init__(self, name, train_type, cur_supply, cur_pos, prior, onTheWay = True):
         self.name = name
         self.max_supply = train_type['max_supply']
         self.speed = train_type['speed']
 
         self.cur_supply = cur_supply
-        self.cur_pos = cur_pos
-        #self.distance = 0
+        self.priority = prior
+        self.distance = cur_pos
         self.onTheWay = onTheWay
         self.train_type = train_type['type']
 
     def __repr__(self):
-        return 'Name: {}, Supply: {} / {} '.format(self.name, self.cur_supply, self.max_supply)
+        return 'Name: {}, Supply: {} / {} Prior: {}'.format(self.name, self.cur_supply, self.max_supply, self.priority)
 
     def Load(self, amount):
         extra_supply = 0
@@ -43,9 +43,5 @@ class Train:
         return self.cur_supply == 0
 
     def Move(self):
-        if self.Empty():
-            self.cur_pos -= self.speed
-
-        elif self.Full():
-            self.cur_pos += self.speed
+        self.distance -= self.speed
 

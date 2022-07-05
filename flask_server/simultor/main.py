@@ -20,7 +20,7 @@ def GetTrains():
     #get trains
     trains = []
     for train in db.trains:
-        trains.append( Train(train['name'], trains_templ[train['template']-1], train['cur_supply'], train['cur_pos'] ) )
+        trains.append( Train(train['name'], trains_templ[train['template']-1], train['cur_supply'], train['cur_pos'], train['priority'] ) )
     return trains
 
 
@@ -73,7 +73,7 @@ def main():
             o.Tick()
 
         for t in trains:
-            db.WriteTrain(t.name, d, t.cur_supply, t.cur_pos)
+            db.WriteTrain(t.name, d, t.cur_supply, t.distance)
         
         for t in terminals:
             trains_len = min(t.num_rails, len(t.trains))

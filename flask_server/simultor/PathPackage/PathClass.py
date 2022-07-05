@@ -14,39 +14,39 @@ class Path:
 
     def CheckArrival(self):
         for t in self.trains_list:
-            if t.cur_pos <= 0 and t.onTheWay == True and t.cur_supply == 0:
-                #print('TRAIN ', t, 'ARRIVED AT LOAD')
-                t.cur_pos = 0
+            if t.distance <= 0 and t.onTheWay == True:
+                t.distance = 0
                 t.onTheWay = False
-                self.load_stations.trains.append(t)
-            elif t.cur_pos >= self.path_len and t.onTheWay == True and t.cur_supply == t.max_supply:
-                #print('TRAIN ', t, 'ARRIVED AT UNLOAD')
-                t.cur_pos = self.path_len
-                t.onTheWay = False
-                self.unload_stations.trains.append(t)
+                if t.Empty():
+                    #print('TRAIN ', t, 'ARRIVED AT LOAD')
+                    self.load_stations.trains.append(t)
+                    self.load_stations.trains.sort(key = lambda tr:(tr.priority, tr.cur_supply), reverse=True)
+                elif t.Full():
+                    #print('TRAIN ', t, 'ARRIVED AT UNLOAD')
+                    self.unload_stations.trains.append(t)
+                    self.unload_stations.trains.sort(key = lambda t:(t.priority, t.cur_supply), reverse=True)
 
     def CheckReadyTrains(self):
         for t in self.trains_list:
             print(t)
-            if (t.cur_supply == t.max_supply) and (t.onTheWay == False) and (t.cur_pos == 0):
-                #print('TRAIN IS READY TO TRAVEL')
-                self.DelTrain(t, self.load_stations.trains)
-                t.onTheWay = True
-            elif (t.cur_supply == 0) and (t.onTheWay == False) and (t.cur_pos == self.path_len):
-                self.DelTrain(t, self.unload_stations.trains)
-                t.onTheWay = True
+            if (t.onTheWay == False):
+                if t.Full() and (t in self.load_stations.trains):
+                    self.DelTrain(t, self.load_stations.trains)
+                    t.onTheWay = True
+                    t.distance = self.path_len
+                elif t.Empty() and (t in self.unload_stations.trains):
+                    self.DelTrain(t, self.unload_stations.trains)
+                    t.onTheWay = True
+                    t.distance = self.path_len
 
-    def MoveTrains(self):
-        #print(self.load_stations)   
+    def MoveTrains(self):   
         for t in self.trains_list:
             if (t not in self.load_stations.trains) and (t not in self.unload_stations.trains):
                 t.Move()
         
         for t in self.trains_list:
-            if t.cur_pos > self.path_len:
-                t.cur_pos = self.path_len
-            elif t.cur_pos < 0:
-                t.cur_pos = 0
+            if t.distance < 0:
+                t.distance = 0
 
 
     def DelTrain(self, tr, trlist):
